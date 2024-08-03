@@ -14,6 +14,7 @@ export class UserFormComponent implements OnInit{
   form!: FormGroup;
   formData: any = {};
   predictionResult: any = {'prediction': 0};
+  predictionHistroy: any = [];
 
   constructor(private service: GetPredictionService, private formBuilder: FormBuilder) {}
 
@@ -41,6 +42,11 @@ export class UserFormComponent implements OnInit{
         (response: any) => {
           console.log(response);
           this.predictionResult = response;
+          
+          let copyFormData = this.formData;
+          copyFormData['prediction'] = response.prediction
+          this.predictionHistroy.push(copyFormData);
+          console.log('predictionHistroy', this.predictionHistroy);
         },
         (error: any) => {
           console.log("error", error);

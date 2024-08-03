@@ -1,5 +1,5 @@
 <div>
-    <div class="row">
+    <div class="row" id="hpp-form-section">
         <div class="col-sm-8">
             <form [formGroup]="form" (ngSubmit)="getPrediction()" id="user-form" class="form-group">
                 <input type="number" class="form-control" id="longitude" placeholder="enter longitude" formControlName="longitude">
@@ -29,5 +29,40 @@
                 Error in fetching prediction result.
             </div>
         </div>
+    </div>
+    <div class="row" id="hpp-table-section">
+        <h4>Prediction History</h4>
+        <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Longitude</th>
+                  <th>Latitude</th>
+                  <th>Housing Median Age</th>
+                  <th>Households</th>
+                  <th>Median Income</th>
+                  <th>Ocean Proximity</th>
+                  <th>Population</th>
+                  <th>Total Bedrooms</th>
+                  <th>Total Rooms</th>
+                  <th>Prediction</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of predictionHistroy">
+                  <td>{{ item.longitude }}</td>
+                  <td>{{ item.latitude }}</td>
+                  <td>{{ item.housing_median_age }}</td>
+                  <td>{{ item.households }}</td>
+                  <td>{{ item.median_income }}</td>
+                  <td>{{ item.ocean_proximity }}</td>
+                  <td>{{ item.population }}</td>
+                  <td>{{ item.total_bedrooms }}</td>
+                  <td>{{ item.total_rooms }}</td>
+                  <td>{{ item.prediction }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
     </div>
 </div>
