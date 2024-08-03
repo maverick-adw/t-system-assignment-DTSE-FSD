@@ -1,0 +1,27 @@
+<div id="user-form">
+    <div class="row">
+        <div class="col-sm-8">
+            <form [formGroup]="form" (ngSubmit)="getPrediction()">
+                <input type="number" class="form-control" id="longitude" placeholder="enter longitude">
+                <input type="number" class="form-control" id="latitude" placeholder="enter latitude">
+                <input type="number" class="form-control" id="housing_median_age" placeholder="enter housing_median_age">
+                <input type="number" class="form-control" id="total_rooms" placeholder="enter total_rooms">
+                <input type="number" class="form-control" id="total_bedrooms" placeholder="enter total_bedrooms">
+                <input type="number" class="form-control" id="population" placeholder="enter population">
+                <input type="number" class="form-control" id="households" placeholder="enter households">
+                <input type="number" class="form-control" id="median_income" placeholder="enter median_income">
+                <select class="form-select" id="ocean_proximity">
+                    <option value="NEAR BAY">NEAR BAY</option>
+                    <option value="1H OCEAN">1H OCEAN</option>
+                    <option value="INLAND">INLAND</option>
+                    <option value="NEAR OCEAN">NEAR OCEAN</option>
+                    <option value="ISLAND">ISLAND</option>
+                </select>
+                <button type="submit" class="btn btn-primary btn-sm btn-block" id="btn-submit">Submit</button>
+            </form>
+        </div>
+        <div class="col-sm-4">
+            
+        </div>
+    </div>
+</div>
