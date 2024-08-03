@@ -1,68 +1,77 @@
 <div>
-    <div class="row" id="hpp-form-section">
-        <div class="col-sm-8">
-            <form [formGroup]="form" (ngSubmit)="getPrediction()" id="user-form" class="form-group">
-                <input type="number" class="form-control" id="longitude" placeholder="enter longitude" formControlName="longitude">
-                <input type="number" class="form-control" id="latitude" placeholder="enter latitude" formControlName="latitude">
-                <input type="number" class="form-control" id="housing_median_age" placeholder="enter housing_median_age" formControlName="housing_median_age">
-                <input type="number" class="form-control" id="total_rooms" placeholder="enter total_rooms" formControlName="total_rooms">
-                <input type="number" class="form-control" id="total_bedrooms" placeholder="enter total_bedrooms" formControlName="total_bedrooms">
-                <input type="number" class="form-control" id="population" placeholder="enter population" formControlName="population">
-                <input type="number" class="form-control" id="households" placeholder="enter households" formControlName="households">
-                <input type="number" class="form-control" id="median_income" placeholder="enter median_income" formControlName="median_income">
-                <select class="form-select" id="ocean_proximity" formControlName="ocean_proximity">
-                    <option value="NEAR BAY">NEAR BAY</option>
-                    <option value="1H OCEAN">1H OCEAN</option>
-                    <option value="INLAND">INLAND</option>
-                    <option value="NEAR OCEAN">NEAR OCEAN</option>
-                    <option value="ISLAND">ISLAND</option>
-                </select>
-                <button type="submit" class="btn btn-primary btn-sm btn-block" id="btn-submit">Submit</button>
-            </form>
-        </div>
-        <div class="col-sm-4 text-center">
-            <h4>Prediction Result</h4>
-            <div *ngIf="predictionResult" class="alert alert-info">
-                {{ predictionResult.prediction }}
+    <div class="container">
+        <div class="row text-center" id="hpp-form-section">
+            <div class="col-sm-8 align-items-center">
+                <form [formGroup]="form" (ngSubmit)="getPrediction()" id="user-form" class="form-group">
+                    <input type="number" class="form-control m-1" id="longitude" placeholder="enter longitude" formControlName="longitude">
+                    <input type="number" class="form-control m-1" id="latitude" placeholder="enter latitude" formControlName="latitude">
+                    <input type="number" class="form-control m-1" id="housing_median_age" placeholder="enter housing_median_age" formControlName="housing_median_age">
+                    <input type="number" class="form-control m-1" id="total_rooms" placeholder="enter total_rooms" formControlName="total_rooms">
+                    <input type="number" class="form-control m-1" id="total_bedrooms" placeholder="enter total_bedrooms" formControlName="total_bedrooms">
+                    <input type="number" class="form-control m-1" id="population" placeholder="enter population" formControlName="population">
+                    <input type="number" class="form-control m-1" id="households" placeholder="enter households" formControlName="households">
+                    <input type="number" class="form-control m-1" id="median_income" placeholder="enter median_income" formControlName="median_income">
+                    <select class="form-select m-1" id="ocean_proximity" formControlName="ocean_proximity">
+                        <option value="NEAR BAY">NEAR BAY</option>
+                        <option value="1H OCEAN">1H OCEAN</option>
+                        <option value="INLAND">INLAND</option>
+                        <option value="NEAR OCEAN">NEAR OCEAN</option>
+                        <option value="ISLAND">ISLAND</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-sm btn-block w-50 mt-3" id="btn-submit">Submit</button>
+                </form>
             </div>
-            <div *ngIf="!predictionResult" class="alert alert-danger">
-                Error in fetching prediction result.
+            <div class="col-sm-4 justify-content-center align-self-center">
+                <div class="row">
+                    <h5>Prediction Result</h5>
+                </div>
+                <div class="row">
+                    <div *ngIf="predictionResult" class="alert alert-info">
+                        {{ predictionResult.prediction }}
+                    </div>
+                    <div *ngIf="!predictionResult" class="alert alert-danger">
+                        Error in fetching prediction result.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row" id="hpp-table-section">
-        <h4>Prediction History</h4>
-        <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Longitude</th>
-                  <th>Latitude</th>
-                  <th>Housing Median Age</th>
-                  <th>Households</th>
-                  <th>Median Income</th>
-                  <th>Ocean Proximity</th>
-                  <th>Population</th>
-                  <th>Total Bedrooms</th>
-                  <th>Total Rooms</th>
-                  <th>Prediction</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of predictionHistroy">
-                  <td>{{ item.longitude }}</td>
-                  <td>{{ item.latitude }}</td>
-                  <td>{{ item.housing_median_age }}</td>
-                  <td>{{ item.households }}</td>
-                  <td>{{ item.median_income }}</td>
-                  <td>{{ item.ocean_proximity }}</td>
-                  <td>{{ item.population }}</td>
-                  <td>{{ item.total_bedrooms }}</td>
-                  <td>{{ item.total_rooms }}</td>
-                  <td>{{ item.prediction }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+
+    <div class="container mt-5">
+        <div class="row" id="hpp-table-section">
+            <h4 class="text-center">Prediction History</h4>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Longitude</th>
+                      <th>Latitude</th>
+                      <th>Housing Median Age</th>
+                      <th>Households</th>
+                      <th>Median Income</th>
+                      <th>Ocean Proximity</th>
+                      <th>Population</th>
+                      <th>Total Bedrooms</th>
+                      <th>Total Rooms</th>
+                      <th>Prediction</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of predictionHistroy">
+                      <td>{{ item.longitude }}</td>
+                      <td>{{ item.latitude }}</td>
+                      <td>{{ item.housing_median_age }}</td>
+                      <td>{{ item.households }}</td>
+                      <td>{{ item.median_income }}</td>
+                      <td>{{ item.ocean_proximity }}</td>
+                      <td>{{ item.population }}</td>
+                      <td>{{ item.total_bedrooms }}</td>
+                      <td>{{ item.total_rooms }}</td>
+                      <td>{{ item.prediction }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+        </div>
     </div>
 </div>
