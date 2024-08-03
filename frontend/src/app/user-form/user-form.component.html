@@ -1,16 +1,16 @@
-<div id="user-form">
+<div>
     <div class="row">
         <div class="col-sm-8">
-            <form [formGroup]="form" (ngSubmit)="getPrediction()">
-                <input type="number" class="form-control" id="longitude" placeholder="enter longitude">
-                <input type="number" class="form-control" id="latitude" placeholder="enter latitude">
-                <input type="number" class="form-control" id="housing_median_age" placeholder="enter housing_median_age">
-                <input type="number" class="form-control" id="total_rooms" placeholder="enter total_rooms">
-                <input type="number" class="form-control" id="total_bedrooms" placeholder="enter total_bedrooms">
-                <input type="number" class="form-control" id="population" placeholder="enter population">
-                <input type="number" class="form-control" id="households" placeholder="enter households">
-                <input type="number" class="form-control" id="median_income" placeholder="enter median_income">
-                <select class="form-select" id="ocean_proximity">
+            <form [formGroup]="form" (ngSubmit)="getPrediction()" id="user-form" class="form-group">
+                <input type="number" class="form-control" id="longitude" placeholder="enter longitude" formControlName="longitude">
+                <input type="number" class="form-control" id="latitude" placeholder="enter latitude" formControlName="latitude">
+                <input type="number" class="form-control" id="housing_median_age" placeholder="enter housing_median_age" formControlName="housing_median_age">
+                <input type="number" class="form-control" id="total_rooms" placeholder="enter total_rooms" formControlName="total_rooms">
+                <input type="number" class="form-control" id="total_bedrooms" placeholder="enter total_bedrooms" formControlName="total_bedrooms">
+                <input type="number" class="form-control" id="population" placeholder="enter population" formControlName="population">
+                <input type="number" class="form-control" id="households" placeholder="enter households" formControlName="households">
+                <input type="number" class="form-control" id="median_income" placeholder="enter median_income" formControlName="median_income">
+                <select class="form-select" id="ocean_proximity" formControlName="ocean_proximity">
                     <option value="NEAR BAY">NEAR BAY</option>
                     <option value="1H OCEAN">1H OCEAN</option>
                     <option value="INLAND">INLAND</option>
@@ -20,8 +20,14 @@
                 <button type="submit" class="btn btn-primary btn-sm btn-block" id="btn-submit">Submit</button>
             </form>
         </div>
-        <div class="col-sm-4">
-            
+        <div class="col-sm-4 text-center">
+            <h4>Prediction Result</h4>
+            <div *ngIf="predictionResult" class="alert alert-info">
+                {{ predictionResult.prediction }}
+            </div>
+            <div *ngIf="!predictionResult" class="alert alert-danger">
+                Error in fetching prediction result.
+            </div>
         </div>
     </div>
 </div>

@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { GetPredictionService } from '../get-prediction.service'
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import {HttpClient, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css'
 })
 export class UserFormComponent implements OnInit{
   form!: FormGroup;
+  formData: any = {};
+  predictionResult: any = {'prediction': 0};
 
-  constructor(private service: GetPredictionService, private formBuilder: FormBuilder, private http:HttpClient) {}
+  constructor(private service: GetPredictionService, private formBuilder: FormBuilder) {}
 
   ngOnInit(){
     this.form = this.formBuilder.group({
@@ -31,21 +33,21 @@ export class UserFormComponent implements OnInit{
   
 
   getPrediction(){
-    // return this.service.getPrediction()
-    let url = 'http://127.0.0.1:8000/predict_house_price'
-    let params = {
-      "longitude": -115.73,
-      "latitude": 33.35,
-      "housing_median_age": 23.0,
-      "total_rooms": 1586.0,
-      "total_bedrooms": 448.0,
-      "population": 338.0,
-      "households": 182.0,
-      "median_income": 1.2132,
-      "ocean_proximity": "INLANDD"
+    this.formData = this.form.value;
+
+    if (this.form.valid){
+      console.log('Extracted Form Data:', this.formData);
+      this.service.getPrediction(this.formData).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.predictionResult = response;
+        },
+        (error: any) => {
+          console.log("error", error);
+        }
+      );
+    }else{
+      console.log('form is invalid', this.formData);
     }
-     
-    return this.http.get(url, {params}).subscribe((response:any) => {console.log(response)}, (error:any) => {console.log("error")})
-    
   }
 }

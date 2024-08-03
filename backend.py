@@ -5,6 +5,7 @@ import pandas as pd
 from pydantic import BaseModel
 from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from problem_statement.main import load_model, predict
@@ -12,6 +13,18 @@ from problem_statement.main import load_model, predict
 
 model = load_model(path.join("problem_statement", "model.joblib"))
 app = FastAPI()
+
+origins = [
+    '*'
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class InputDataModel(BaseModel):
@@ -48,7 +61,7 @@ def prepare_df(item: InputDataModel) -> pd.DataFrame:
     return item
 
 
-@app.get("/predict_house_price")
+@app.post("/predict_house_price")
 async def predict_house_price(item: InputDataModel) -> JSONResponse:
     """
     Main API endpoint
